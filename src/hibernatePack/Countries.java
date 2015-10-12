@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class Countries {
     @Id @GeneratedValue
     @Column(name = "ID")
-
     private int id;
 
     @Column(name = "COUNTRY",columnDefinition = "nvarchar(2)")
