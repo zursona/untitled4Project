@@ -12,6 +12,8 @@ import javax.persistence.*;
 public class Users {
     @Id @GeneratedValue
     @Column(name = "ID")
+
+
     private int id;
 
     @Column(name = "USERNAME",columnDefinition = "nvarchar(50)")
