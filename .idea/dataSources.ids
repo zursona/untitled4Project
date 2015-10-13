@@ -321,10 +321,16 @@
       <column name="TABLE_SCHEMA" sqlType="nvarchar" precision="128" scale="0" nullable="true" jdbcType="-9"/>
       <column name="TABLE_NAME" sqlType="sysname" precision="128" scale="0" nullable="false" jdbcType="-9"/>
     </table>
+    <table name="CITIES" schema="dbo" catalog="projectDevDB" type="TABLE">
+      <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key name="PK__CITIES__3214EC278A7B7A68" columns="ID"/>
+      <exported-key name="CITY_DESC_FK1" table="City_desc" schema="dbo" catalog="projectDevDB" columns="CITY_ID"/>
+      <exported-key name="USER_OFFICES_FK1" table="USER_OFFICES" schema="dbo" catalog="projectDevDB" columns="CITY_ID"/>
+    </table>
     <table name="COUNTRIES" schema="dbo" catalog="projectDevDB" type="TABLE">
       <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="COUNTRY" sqlType="nvarchar" precision="2" scale="0" nullable="true" jdbcType="-9"/>
-      <primary-key name="PK__COUNTRIE__3214EC278D0A1C4B" columns="ID"/>
+      <primary-key name="PK__COUNTRIE__3214EC271FFDF059" columns="ID"/>
       <exported-key name="COUNTRY_DESC_FK1" table="COUNTRY_DESC" schema="dbo" catalog="projectDevDB" columns="COUNTRIES_ID"/>
       <exported-key name="FK_gi38d12hqn7a7mb8gg0iflc6t" table="USER_PERSONAL_INFO" schema="dbo" catalog="projectDevDB" columns="COUNTRIES_ID"/>
       <index name="COUNTRIES_UK1" unique="true" columns="COUNTRY"/>
@@ -334,15 +340,25 @@
       <column name="COUNTRIES_DESC" sqlType="nvarchar" precision="100" scale="0" nullable="false" jdbcType="-9"/>
       <column name="COUNTRIES_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="ID_LANG" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PK__COUNTRY___3214EC2783AC4238" columns="ID"/>
+      <primary-key name="PK__COUNTRY___3214EC27A91DD1FC" columns="ID"/>
       <foreign-key name="COUNTRY_DESC_FK1" columns="COUNTRIES_ID" ref-table="COUNTRIES" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <foreign-key name="COUNTRY_DESC_FK2" columns="ID_LANG" ref-table="LANGUAGE" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <index name="COUNTRY_DESC_UK1" unique="true" columns="COUNTRIES_ID,ID_LANG"/>
     </table>
+    <table name="City_desc" schema="dbo" catalog="projectDevDB" type="TABLE">
+      <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="CITY_DESC" sqlType="nvarchar" precision="500" scale="0" nullable="false" jdbcType="-9"/>
+      <column name="CITY_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_LANG" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PK__City_des__3214EC272F531DD6" columns="ID"/>
+      <foreign-key name="CITY_DESC_FK1" columns="CITY_ID" ref-table="CITIES" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <foreign-key name="CITY_DESC_FK2" columns="ID_LANG" ref-table="LANGUAGE" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <index name="CITY_DESC_UK1" unique="true" columns="CITY_ID,ID_LANG"/>
+    </table>
     <table name="ID_DOC_TYPE" schema="dbo" catalog="projectDevDB" type="TABLE">
       <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="ID_DOC_TYPE" sqlType="nvarchar" precision="10" scale="0" nullable="true" jdbcType="-9"/>
-      <primary-key name="PK__ID_DOC_T__3214EC27A9F33C64" columns="ID"/>
+      <primary-key name="PK__ID_DOC_T__3214EC2720BBF7B3" columns="ID"/>
       <exported-key name="ID_DOC_TYPE_DESC_FK1" table="ID_DOC_TYPE_DESC" schema="dbo" catalog="projectDevDB" columns="ID_DOC_TYPE_ID"/>
       <exported-key name="USER_PERSONAL_INFO_FK2" table="USER_PERSONAL_INFO" schema="dbo" catalog="projectDevDB" columns="ID_DOC_TYPE_ID"/>
       <index name="ID_DOC_TYPE_UK1" unique="true" columns="ID_DOC_TYPE"/>
@@ -352,7 +368,7 @@
       <column name="ID_DOC_DESC" sqlType="nvarchar" precision="100" scale="0" nullable="false" jdbcType="-9"/>
       <column name="ID_DOC_TYPE_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="ID_LANG" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PK__ID_DOC_T__3214EC27EFF3D85D" columns="ID"/>
+      <primary-key name="PK__ID_DOC_T__3214EC27E8731A37" columns="ID"/>
       <foreign-key name="ID_DOC_TYPE_DESC_FK1" columns="ID_DOC_TYPE_ID" ref-table="ID_DOC_TYPE" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <foreign-key name="ID_DOC_TYPE_DESC_FK2" columns="ID_LANG" ref-table="LANGUAGE" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <index name="ID_DOC_TYPE_DESC_UK1" unique="true" columns="ID_DOC_TYPE_ID,ID_LANG"/>
@@ -362,24 +378,49 @@
       <column name="IS_DEF" sqlType="char" precision="1" scale="0" nullable="false" jdbcType="1"/>
       <column name="LANG" sqlType="nvarchar" precision="2" scale="0" nullable="true" jdbcType="-9"/>
       <column name="LANG_DESC" sqlType="nvarchar" precision="500" scale="0" nullable="false" jdbcType="-9"/>
-      <primary-key name="PK__LANGUAGE__3214EC278A6F64D8" columns="ID"/>
+      <primary-key name="PK__LANGUAGE__3214EC279AF64E33" columns="ID"/>
       <exported-key name="COUNTRY_DESC_FK2" table="COUNTRY_DESC" schema="dbo" catalog="projectDevDB" columns="ID_LANG"/>
+      <exported-key name="CITY_DESC_FK2" table="City_desc" schema="dbo" catalog="projectDevDB" columns="ID_LANG"/>
       <exported-key name="ID_DOC_TYPE_DESC_FK2" table="ID_DOC_TYPE_DESC" schema="dbo" catalog="projectDevDB" columns="ID_LANG"/>
+      <exported-key name="OFFICE_ADDR_DESC_FK2" table="OFFICE_ADDR_DESC" schema="dbo" catalog="projectDevDB" columns="ID_LANG"/>
       <exported-key name="USER_ROLE_DESC_FK2" table="USER_ROLE_DESC" schema="dbo" catalog="projectDevDB" columns="ID_LANG"/>
       <index name="LANGUAGE_UK1" unique="true" columns="LANG"/>
     </table>
+    <table name="OFFICE_ADDR_DESC" schema="dbo" catalog="projectDevDB" type="TABLE">
+      <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="OFFICE_ADDR_DESC" sqlType="nvarchar" precision="500" scale="0" nullable="false" jdbcType="-9"/>
+      <column name="ID_LANG" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="USER_OFFICES_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PK__OFFICE_A__3214EC27AB021E87" columns="ID"/>
+      <foreign-key name="OFFICE_ADDR_DESC_FK2" columns="ID_LANG" ref-table="LANGUAGE" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <foreign-key name="OFFICE_ADDR_DESC_FK1" columns="USER_OFFICES_ID" ref-table="USER_OFFICES" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <index name="OFFICE_ADDR_DESC_UK1" unique="true" columns="USER_OFFICES_ID,ID_LANG"/>
+    </table>
     <table name="USERS" schema="dbo" catalog="projectDevDB" type="TABLE">
       <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="OFFICE" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="STATUS" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="PERSONAL_ID" sqlType="nvarchar" precision="50" scale="0" nullable="true" jdbcType="-9"/>
       <column name="PERSONAL_INFO_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="STATUS" sqlType="nvarchar" precision="1" scale="0" nullable="false" jdbcType="-9"/>
       <column name="USERNAME" sqlType="nvarchar" precision="50" scale="0" nullable="true" jdbcType="-9"/>
+      <column name="OFFICE_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="USER_ROLE_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PK__USERS__3214EC270BD80800" columns="ID"/>
+      <primary-key name="PK__USERS__3214EC278D20031E" columns="ID"/>
+      <foreign-key name="USERS_FK2" columns="OFFICE_ID" ref-table="USER_OFFICES" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <foreign-key name="USERS_FK1" columns="USER_ROLE_ID" ref-table="USER_ROLES" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <exported-key name="USER_PERSONAL_INFO_FK1" table="USER_PERSONAL_INFO" schema="dbo" catalog="projectDevDB" columns="USER_ID"/>
       <index name="USERS_UK1" unique="true" columns="USERNAME"/>
+    </table>
+    <table name="USER_OFFICES" schema="dbo" catalog="projectDevDB" type="TABLE">
+      <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="OFFICE" sqlType="nvarchar" precision="10" scale="0" nullable="true" jdbcType="-9"/>
+      <column name="OFFICE_DESC" sqlType="nvarchar" precision="500" scale="0" nullable="false" jdbcType="-9"/>
+      <column name="STATUS" sqlType="nvarchar" precision="1" scale="0" nullable="false" jdbcType="-9"/>
+      <column name="CITY_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PK__USER_OFF__3214EC2746341C0F" columns="ID"/>
+      <foreign-key name="USER_OFFICES_FK1" columns="CITY_ID" ref-table="CITIES" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <exported-key name="OFFICE_ADDR_DESC_FK1" table="OFFICE_ADDR_DESC" schema="dbo" catalog="projectDevDB" columns="USER_OFFICES_ID"/>
+      <exported-key name="USERS_FK2" table="USERS" schema="dbo" catalog="projectDevDB" columns="OFFICE_ID"/>
+      <index name="USER_OFFICES_UK1" unique="true" columns="OFFICE"/>
     </table>
     <table name="USER_PERSONAL_INFO" schema="dbo" catalog="projectDevDB" type="TABLE">
       <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -393,7 +434,7 @@
       <column name="COUNTRIES_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="ID_DOC_TYPE_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="USER_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PK__USER_PER__3214EC2723ED0024" columns="ID"/>
+      <primary-key name="PK__USER_PER__3214EC270B16C214" columns="ID"/>
       <foreign-key name="FK_gi38d12hqn7a7mb8gg0iflc6t" columns="COUNTRIES_ID" ref-table="COUNTRIES" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <foreign-key name="USER_PERSONAL_INFO_FK2" columns="ID_DOC_TYPE_ID" ref-table="ID_DOC_TYPE" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <foreign-key name="USER_PERSONAL_INFO_FK1" columns="USER_ID" ref-table="USERS" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
@@ -402,17 +443,17 @@
     <table name="USER_ROLES" schema="dbo" catalog="projectDevDB" type="TABLE">
       <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="USER_ROLE" sqlType="nvarchar" precision="20" scale="0" nullable="true" jdbcType="-9"/>
-      <primary-key name="PK__USER_ROL__3214EC277DB2ABA5" columns="ID"/>
+      <primary-key name="PK__USER_ROL__3214EC2729A69667" columns="ID"/>
       <exported-key name="USERS_FK1" table="USERS" schema="dbo" catalog="projectDevDB" columns="USER_ROLE_ID"/>
       <exported-key name="USER_ROLE_DESC_FK1" table="USER_ROLE_DESC" schema="dbo" catalog="projectDevDB" columns="USER_ROLE_ID"/>
       <index name="USER_ROLES_UK1" unique="true" columns="USER_ROLE"/>
     </table>
     <table name="USER_ROLE_DESC" schema="dbo" catalog="projectDevDB" type="TABLE">
       <column name="ID" sqlType="int identity" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="USER_ROLE_DESC" sqlType="nvarchar" precision="100" scale="0" nullable="false" jdbcType="-9"/>
+      <column name="USER_ROLE_DESC" sqlType="nvarchar" precision="500" scale="0" nullable="false" jdbcType="-9"/>
       <column name="ID_LANG" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="USER_ROLE_ID" sqlType="int" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PK__USER_ROL__3214EC27182486C7" columns="ID"/>
+      <primary-key name="PK__USER_ROL__3214EC27B6B54085" columns="ID"/>
       <foreign-key name="USER_ROLE_DESC_FK2" columns="ID_LANG" ref-table="LANGUAGE" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <foreign-key name="USER_ROLE_DESC_FK1" columns="USER_ROLE_ID" ref-table="USER_ROLES" ref-schema="dbo" ref-catalog="projectDevDB" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
       <index name="USER_ROLE_DESC_UK1" unique="true" columns="USER_ROLE_ID,ID_LANG"/>

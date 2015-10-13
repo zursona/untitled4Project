@@ -13,14 +13,14 @@ public class Language {
     @Column(name="ID")
     private int id;
 
-    @Column(name="LANG",columnDefinition = "nvarchar(2)")
+    @Column(name="LANG",length = 2,nullable = false)
     private String lang;
 
-    @Column(name="LANG_DESC",columnDefinition = "nvarchar(500) not null")
+    @Column(name="LANG_DESC",length = 500,nullable = false)
     private String langDesc;
 
     @Type(type = "yes_no")
-    @Column(name="IS_DEF",columnDefinition = "char(1) not null")
+    @Column(name="IS_DEF",length = 1,nullable = false)
     private String isDef;
 
     public int getId() {

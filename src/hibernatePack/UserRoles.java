@@ -10,10 +10,10 @@ import javax.persistence.*;
 public class UserRoles {
     @Id
     @GeneratedValue
-    @Column(name="ID")
+    @Column(name = "ID")
     private int id;
 
-    @Column(name = "USER_ROLE",columnDefinition = "nvarchar(20)")
+    @Column(name = "USER_ROLE",length = 20,nullable = false)
     private String userRole;
 
     public int getId() {

@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class UserRoleDesc {
     @Id
     @GeneratedValue
-    @Column(name="ID")
+    @Column(name = "ID")
     private int id;
 
     @ManyToOne
@@ -25,7 +25,7 @@ public class UserRoleDesc {
     @ForeignKey(name = "USER_ROLE_DESC_FK2")
     private Language idLang;
 
-    @Column(name="USER_ROLE_DESC",columnDefinition = "nvarchar(100) not null")
+    @Column(name ="USER_ROLE_DESC",length = 500,nullable = false)
     private String userRoleDesc;
 
     public int getId() {

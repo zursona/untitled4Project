@@ -25,7 +25,7 @@ public class CountryDesc{
     @ForeignKey(name = "COUNTRY_DESC_FK2")
     private Language idLang;
 
-    @Column(name="COUNTRIES_DESC",columnDefinition = "nvarchar(100) not null")
+    @Column(name="COUNTRIES_DESC",length = 500,nullable = false)
     private String countriesDesc;
 
     public Countries getCountriesId() {

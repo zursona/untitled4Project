@@ -21,5 +21,9 @@
     <mapping class="hibernatePack.CountryDesc"/>
     <mapping class="hibernatePack.UserRoles"/>
     <mapping class="hibernatePack.UserRoleDesc"/>
+    <mapping class="hibernatePack.UserOffices"/>
+    <mapping class="hibernatePack.OfficeAddrDesc"/>
+    <mapping class="hibernatePack.Cities"/>
+    <mapping class="hibernatePack.City_desc"/>
   </session-factory>
 </hibernate-configuration>

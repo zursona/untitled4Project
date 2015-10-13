@@ -21,7 +21,7 @@ public class IdDocTypeDesc{
     @ForeignKey(name = "ID_DOC_TYPE_DESC_FK2")
     private Language idLang;
 
-    @Column(name="ID_DOC_DESC",columnDefinition = "nvarchar(100) not null")
+    @Column(name="ID_DOC_DESC",length = 500,nullable = false)
     private String idDocDesc;
 
     public int getId() {

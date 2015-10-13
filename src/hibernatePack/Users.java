@@ -1,5 +1,6 @@
 package hibernatePack;
 
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.ForeignKey;
 
 import javax.persistence.*;
@@ -9,17 +10,17 @@ import javax.persistence.*;
  */
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "USERNAME",name = "USERS_UK1")},name="USERS")
+@Check(constraints = "status in ('A','D','C')")
 public class Users {
     @Id @GeneratedValue
     @Column(name = "ID")
 
-
     private int id;
 
-    @Column(name = "USERNAME",columnDefinition = "nvarchar(50)")
+    @Column(name = "USERNAME",length = 50,nullable = false)
     private String username;
 
-    @Column(name = "PERSONAL_ID",columnDefinition = "nvarchar(50)")
+    @Column(name = "PERSONAL_ID",length = 50,nullable = false)
     private int personalId;
 
 
@@ -31,8 +32,13 @@ public class Users {
     @ForeignKey(name = "USERS_FK1")
     private UserRoles userRoleId;
 
-    private String OFFICE;
-    private String STATUS;
+    @ManyToOne
+    @JoinColumn(name = "OFFICE_ID")
+    @ForeignKey(name = "USERS_FK2")
+    private UserOffices office;
+
+    @Column(name = "STATUS",length = 1,nullable = false)
+    private String status;
 
     public int getId() {
         return id;
@@ -72,5 +78,21 @@ public class Users {
 
     public void setPersonalInfoId(int personalInfoId) {
         this.personalInfoId = personalInfoId;
+    }
+
+    public UserOffices getOffice() {
+        return office;
+    }
+
+    public void setOffice(UserOffices office) {
+        this.office = office;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

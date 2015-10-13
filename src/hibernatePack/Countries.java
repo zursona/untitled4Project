@@ -12,7 +12,7 @@ public class Countries {
     @Column(name = "ID")
     private int id;
 
-    @Column(name = "COUNTRY",columnDefinition = "nvarchar(2)")
+    @Column(name = "COUNTRY",length = 2,nullable = false)
     private String country;
 
     public int getId() {

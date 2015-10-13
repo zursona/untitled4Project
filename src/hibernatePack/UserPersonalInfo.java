@@ -1,5 +1,6 @@
 package hibernatePack;
 
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.Type;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Table (uniqueConstraints = {@UniqueConstraint(columnNames = {"USER_ID","ID_DOC_TYPE_ID"},name = "USER_PERSONAL_INFO_UK1")},name="USER_PERSONAL_INFO")
+@Check(constraints = "sex in ('M','F')")
 public class UserPersonalInfo {
     @Id @GeneratedValue
     @Column(name = "ID")
@@ -22,7 +24,7 @@ public class UserPersonalInfo {
     @ForeignKey(name = "USER_PERSONAL_INFO_FK1")
     private Users userId;
 
-    @Column(name = "SEX",columnDefinition = "nvarchar(1)")
+    @Column(name = "SEX",length = 1,nullable = false)
     private String sex;
 
     @Temporal(TemporalType.DATE)
@@ -34,7 +36,7 @@ public class UserPersonalInfo {
     @ForeignKey(name = "USER_PERSONAL_INFO_FK2")
     private IdDocType idDocTypeId;
 
-    @Column(name = "ID_DOC_SER",columnDefinition = "nvarchar(1)")
+    @Column(name = "ID_DOC_SER",length = 1,nullable = false)
     private String idDocSer;
 
     @Temporal(TemporalType.DATE)
@@ -45,7 +47,7 @@ public class UserPersonalInfo {
     @Column(name = "ID_DOC_EXP_DATE",columnDefinition = "date")
     private Date idDocExpDate;
 
-    @Column(name = "ID_DOC_NO",columnDefinition = "nvarchar(50)")
+    @Column(name = "ID_DOC_NO",length = 50,nullable = false)
     private String idDocNo;
 
     @ManyToOne
@@ -53,7 +55,7 @@ public class UserPersonalInfo {
     private Countries countriesId;
 
     @Type(type = "yes_no")
-    @Column(name="IS_DEF",columnDefinition = "char(1) not null")
+    @Column(name="IS_DEF",length = 1,nullable = false)
     private String isDef;
 
     public String getSex() {

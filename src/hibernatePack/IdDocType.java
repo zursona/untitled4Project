@@ -12,7 +12,7 @@ public class IdDocType {
     @Column(name="ID")
     private int id;
 
-    @Column(name="ID_DOC_TYPE",columnDefinition = "nvarchar(10)")
+    @Column(name="ID_DOC_TYPE",length = 50,nullable = false)
     private String idDocType;
 
     public int getId() {
